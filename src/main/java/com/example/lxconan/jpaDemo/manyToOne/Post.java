@@ -1,5 +1,7 @@
 package com.example.lxconan.jpaDemo.manyToOne;
 
+import org.springframework.data.jpa.repository.JpaRepository;
+
 import javax.persistence.*;
 
 @Entity
@@ -46,4 +48,8 @@ class Post {
     public int hashCode() {
         return 42;
     }
+}
+
+interface PostRepository extends JpaRepository<Post, Long> {
+    Post findOneById(Long id);
 }

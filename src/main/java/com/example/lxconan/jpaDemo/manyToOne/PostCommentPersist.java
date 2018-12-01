@@ -5,22 +5,15 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "post_comment")
-class PostComment {
+@Table(name = "post_comment_persist")
+class PostCommentPersist {
     @Id
     private Long id;
     private String review;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "post_id")
     private Post post;
-
-    protected PostComment() { }
-
-    public PostComment(Long id, String review) {
-        this.id = id;
-        this.review = review;
-    }
 
     public Long getId() {
         return id;
@@ -45,8 +38,15 @@ class PostComment {
     public void setPost(Post post) {
         this.post = post;
     }
+
+    protected PostCommentPersist() {}
+
+    public PostCommentPersist(Long id, String review) {
+        this.id = id;
+        this.review = review;
+    }
 }
 
-interface PostCommentRepository extends JpaRepository<PostComment, Long> {
-    PostComment findOneById(Long id);
+interface PostCommentPersistRepository extends JpaRepository<PostCommentPersist, Long> {
+    PostCommentPersist findOneById(Long id);
 }

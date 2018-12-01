@@ -11,13 +11,13 @@ public abstract class JpaTestBase {
 
     protected EntityManager getEntityManager() {return entityManager;}
 
-    protected void prepareDataAndFlush(Consumer<EntityManager> consumer) {
+    protected void flush(Consumer<EntityManager> consumer) {
         final EntityManager em = getEntityManager();
         consumer.accept(em);
         em.flush();
     }
 
-    public void runAndClear(Consumer<EntityManager> consumer) {
+    public void flushAndClear(Consumer<EntityManager> consumer) {
         final EntityManager em = getEntityManager();
         consumer.accept(em);
         em.flush();
